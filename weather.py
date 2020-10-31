@@ -8,13 +8,13 @@ import re
 import sys
 
 
-interval = 5
+interval = 10*60
 location = 'Norway/Oslo/Oslo/Oslo'
 
 
 def showPhoto(filepath):
 	try:
-		return subprocess.run(['fim', '-q', '--no-history', '--autozoom', filepath], timeout=30)
+		return subprocess.run(['fim', '-q', '--no-history', '--autozoom', filepath], timeout=interval)
 	except subprocess.TimeoutExpired:
 		pass
 

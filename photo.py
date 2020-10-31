@@ -1,13 +1,15 @@
-#!/usr/local/bin/python
+#!/usr/bin/python3
 
 import subprocess
 import sys
 
-interval=30
+interval=10
 
 def showPhoto(filepath):
-	print('Starting slideshow from directory '+filepath)
-	return subprocess.call(['fim', '-q', '--no-history', '--random', '--slideshow', str(interval), '-R', filepath])
+	try:
+		return subprocess.call(['fim', '-q', '--no-history', '--random', '-R', '--autozoom', filepath], timeout=interval)
+	except subprocess.TimeoutExpired:
+		pass
 
 search_dir='/mnt'
 
@@ -15,4 +17,8 @@ search_dir='/mnt'
 if len(sys.argv) > 1:
 	search_dir=sys.argv[1]
 
-showPhoto(search_dir)
+print('Starting slideshow from directory '+search_dir)
+
+while True:
+	exit = showPhoto(search_dir)
+	#print(exit)
