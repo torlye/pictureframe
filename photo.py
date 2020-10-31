@@ -11,7 +11,7 @@ def showPhoto(filepath):
 	except subprocess.TimeoutExpired:
 		pass
 
-search_dir='/mnt'
+search_dir='/media'
 
 
 if len(sys.argv) > 1:
