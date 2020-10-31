@@ -1,4 +1,4 @@
-#!/usr/local/bin/python
+#!/usr/bin/python3
 
 import os
 from fnmatch import fnmatch
@@ -8,17 +8,21 @@ import re
 import sys
 
 
-interval = 10*60
+interval = 5
 location = 'Norway/Oslo/Oslo/Oslo'
 
 
 def showPhoto(filepath):
-	return subprocess.call(['fim', '-q', '--no-history', '--autozoom', '-c', 'sleep \"'+ str(interval) + '\";quit;', filepath])
+	try:
+		return subprocess.run(['fim', '-q', '--no-history', '--autozoom', filepath], timeout=30)
+	except subprocess.TimeoutExpired:
+		pass
 
 def getMeteogram():
 	subprocess.call(['wget', '-N', 'https://www.yr.no/place/'+location+'/meteogram.png'])
 
 print('Showing meteogram for '+location+', refreshing every '+str(interval)+' seconds')
+
 
 while True:
 	getMeteogram()
