@@ -1,18 +1,19 @@
 #!/usr/bin/python3
-
-import subprocess
 import sys
+import subprocess
+import signal
 
-interval=10
+interval=60
 
 def showPhoto(filepath):
 	try:
-		return subprocess.call(['fim', '-q', '--no-history', '--random', '-R', '--autozoom', filepath], timeout=interval)
+		p = subprocess.Popen(['fim', '-q', '--no-history', '--random', '-R', '--autozoom', filepath])
+		p.wait(timeout=interval)
 	except subprocess.TimeoutExpired:
+		p.send_signal(signal.SIGINT)
 		pass
 
 search_dir='/media'
-
 
 if len(sys.argv) > 1:
 	search_dir=sys.argv[1]
@@ -20,5 +21,4 @@ if len(sys.argv) > 1:
 print('Starting slideshow from directory '+search_dir)
 
 while True:
-	exit = showPhoto(search_dir)
-	#print(exit)
+	showPhoto(search_dir)

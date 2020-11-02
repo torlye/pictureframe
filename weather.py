@@ -1,29 +1,17 @@
 #!/usr/bin/python3
-
-import os
-from fnmatch import fnmatch
 import subprocess
-import random
-import re
-import sys
-
 
 interval = 10*60
 location = 'Norway/Oslo/Oslo/Oslo'
 
-
-def showPhoto(filepath):
+def showMeteogram():
 	try:
-		return subprocess.run(['fim', '-q', '--no-history', '--autozoom', filepath], timeout=interval)
+		wgetProc = subprocess.run(['wget', '-NqO', '-', 'https://www.yr.no/place/'+location+'/meteogram.png'], stdout=subprocess.PIPE)
+		subprocess.run(['fim', '-aqi', '--no-history'], input=wgetProc.stdout, timeout=interval)
 	except subprocess.TimeoutExpired:
 		pass
 
-def getMeteogram():
-	subprocess.call(['wget', '-N', 'https://www.yr.no/place/'+location+'/meteogram.png'])
-
 print('Showing meteogram for '+location+', refreshing every '+str(interval)+' seconds')
 
-
 while True:
-	getMeteogram()
-	showPhoto('meteogram.png')
+	showMeteogram()
