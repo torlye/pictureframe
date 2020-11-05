@@ -10,10 +10,13 @@ time1 = sys.maxsize
 
 def button_pressed(channel):
 	global time1
-	if GPIO.input(BUTTON_GPIO): # rising edge
+	if GPIO.input(BUTTON_GPIO):
+		# Rising edge
 		time1 = time.time()
-	else # falling edge
-		if time.time() - time1 > 5: # button was held for 5s
+	else:
+		# Falling edge
+		if time.time() - time1 > 5:
+			# Button was held for 5s
 			GPIO.cleanup()
 			os.system("sudo shutdown -h now")
 			quit()
