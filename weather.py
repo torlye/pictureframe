@@ -2,9 +2,12 @@
 import subprocess
 import os
 import signal
+from config import config
+import shutdown
 
-interval = 10*60
-location = 'Norway/Oslo/Oslo/Oslo'
+weatherConfig = config['weather']
+interval = weatherConfig.getint('interval')
+location = weatherConfig.get('location')
 
 def showMeteogram():
 	try:

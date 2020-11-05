@@ -2,8 +2,12 @@
 import sys
 import subprocess
 import signal
+from config import config
+import shutdown
 
-interval=60
+photoConfig = config['photo']
+interval = photoConfig.getint('interval')
+search_dir = photoConfig.get('searchDir')
 
 def showPhoto(filepath):
 	try:
@@ -12,8 +16,6 @@ def showPhoto(filepath):
 	except subprocess.TimeoutExpired:
 		p.send_signal(signal.SIGINT)
 		pass
-
-search_dir='/media'
 
 if len(sys.argv) > 1:
 	search_dir=sys.argv[1]

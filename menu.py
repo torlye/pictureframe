@@ -6,9 +6,12 @@ import sys
 import select
 import signal
 import RPi.GPIO as GPIO
+from config import config
 
-BUTTON_GPIO = 10
-countdown = 20
+menuConfig = config['menu']
+countdown = menuConfig.getint('timeout')
+BUTTON_GPIO = menuConfig.getint('GPIO_button_pin')
+
 selection = 0
 menuitems = ['Photos', 'Videos', 'Weather']
 scripts = ['photo.py', 'video.py', 'weather.py']

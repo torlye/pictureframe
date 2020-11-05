@@ -5,8 +5,12 @@ import subprocess
 import random
 import re
 import sys
+from config import config
+import shutdown
 
-search_dir='/media'
+videoConfig = config['video']
+search_dir = videoConfig.get('searchDir')
+
 extensions = ['mkv', 'mp4', 'm4v', 'mov', 'mpg', 'mpeg', 'avi', 'vob']
 
 def printTemp():
@@ -34,11 +38,12 @@ for path, subdirs, files in os.walk(search_dir):
 		for ext in extensions:
 			if fnmatch(name.lower(), '*.'+ext):
 				filepath = os.path.join(path, name)
-				print(filepath)
+				#print(filepath)
 				filelist.append(filepath)
 				break
 
-print('Found ' + str(len(filelist)) + ' files')
+print('Starting video playback from directory '+search_dir)
+print('Found ' + str(len(filelist)) + 'video files')
 
 if len(filelist) == 0:
 	sys.exit(0)
