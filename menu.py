@@ -21,7 +21,7 @@ def printMenu():
 	for x in range(3):
 		print(('\u25BA' if x == selection else ' ') + ' ' + menuitems[x])
 	print('')
-	print('Selection option will start in: '+str(countdown))
+	print('Selected option will start in: '+str(countdown))
 
 def button_pressed_callback(channel):
 	global selection

@@ -24,6 +24,7 @@ def button_pressed(channel):
 isRunning = False
 
 def startMonitoring():
+	global isRunning
 	if not isRunning:
 		isRunning = True
 		GPIO.setmode(GPIO.BOARD)
