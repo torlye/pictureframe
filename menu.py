@@ -7,6 +7,7 @@ import select
 import signal
 import RPi.GPIO as GPIO
 from config import config
+import photo, video, weather
 
 menuConfig = config['menu']
 countdown = menuConfig.getint('timeout')
@@ -14,7 +15,6 @@ BUTTON_GPIO = menuConfig.getint('GPIO_button_pin')
 
 selection = 0
 menuitems = ['Photos', 'Videos', 'Weather']
-scripts = ['photo.py', 'video.py', 'weather.py']
 
 def printMenu():
 	os.system('clear')
@@ -38,4 +38,10 @@ while countdown > 0:
 	countdown -= 1
 
 GPIO.cleanup()
-subprocess.run(['python3', scripts[selection]])
+
+if selection == 0:
+	photo.start()
+elif selection == 1:
+	video.start()
+else:
+	weather.start()

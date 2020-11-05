@@ -21,6 +21,11 @@ def button_pressed(channel):
 			os.system("sudo shutdown -h now")
 			quit()
 
-GPIO.setmode(GPIO.BOARD)
-GPIO.setup(BUTTON_GPIO, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-GPIO.add_event_detect(BUTTON_GPIO, GPIO.BOTH, callback=button_pressed, bouncetime=200)
+isRunning = False
+
+def startMonitoring():
+	if not isRunning:
+		isRunning = True
+		GPIO.setmode(GPIO.BOARD)
+		GPIO.setup(BUTTON_GPIO, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+		GPIO.add_event_detect(BUTTON_GPIO, GPIO.BOTH, callback=button_pressed, bouncetime=200)

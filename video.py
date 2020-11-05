@@ -28,26 +28,30 @@ def playVideo(filepath):
 	omxparams.append(filepath)
 	return subprocess.call(omxparams)
 
-filelist=[]
-if len(sys.argv) > 1:
-	print('Searching directory ' + sys.argv[1])
-	search_dir=sys.argv[1]
+def start():
+	shutdown.startMonitoring()
+	filelist=[]
 
-for path, subdirs, files in os.walk(search_dir):
-	for name in files:
-		for ext in extensions:
-			if fnmatch(name.lower(), '*.'+ext):
-				filepath = os.path.join(path, name)
-				#print(filepath)
-				filelist.append(filepath)
-				break
+	for path, subdirs, files in os.walk(search_dir):
+		for name in files:
+			for ext in extensions:
+				if fnmatch(name.lower(), '*.'+ext):
+					filepath = os.path.join(path, name)
+					#print(filepath)
+					filelist.append(filepath)
+					break
 
-print('Starting video playback from directory '+search_dir)
-print('Found ' + str(len(filelist)) + 'video files')
+	print('Starting video playback from directory '+search_dir)
+	print('Found ' + str(len(filelist)) + ' video files')
 
-if len(filelist) == 0:
-	sys.exit(0)
+	if len(filelist) == 0:
+		sys.exit(0)
 
-while True:
-	filepath=random.choice(filelist)
-	playVideo(filepath)
+	while True:
+		filepath=random.choice(filelist)
+		playVideo(filepath)
+
+if __name__ == '__main__':
+	if len(sys.argv) > 1:
+		search_dir=sys.argv[1]
+	start()

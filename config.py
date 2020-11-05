@@ -7,8 +7,9 @@ filePath = os.path.join(Path.home(), 'pictureframe-config')
 
 try:
 	with open(filePath) as f:
-		print('Config file exists')
+		print('Found config file at '+filePath)
 except FileNotFoundError:
+	print('Creating new config file at '+filePath)
 	config = configparser.ConfigParser()
 	config['DEFAULT'] = { 
 		'searchDir': '/media',

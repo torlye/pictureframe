@@ -17,10 +17,14 @@ def showPhoto(filepath):
 		p.send_signal(signal.SIGINT)
 		pass
 
-if len(sys.argv) > 1:
-	search_dir=sys.argv[1]
+def start():
+	print('Starting slideshow from directory '+search_dir+' with interval '+str(interval)+' seconds')
+	shutdown.startMonitoring()
 
-print('Starting slideshow from directory '+search_dir)
+	while True:
+		showPhoto(search_dir)
 
-while True:
-	showPhoto(search_dir)
+if __name__ == '__main__':
+	if len(sys.argv) > 1:
+		search_dir=sys.argv[1]
+	start()

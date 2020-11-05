@@ -18,7 +18,12 @@ def showMeteogram():
 		p.send_signal(signal.SIGINT)
 		pass
 
-print('Showing meteogram for '+location+', refreshing every '+str(interval)+' seconds')
+def start():
+	print('Showing meteogram for '+location+', refreshing every '+str(interval)+' seconds')
+	shutdown.startMonitoring()
 
-while True:
-	showMeteogram()
+	while True:
+		showMeteogram()
+
+if __name__ == '__main__':
+	start()
