@@ -19,7 +19,7 @@ def showPhoto(filepath):
 
 def start():
 	print('Starting slideshow from directory '+search_dir+' with interval '+str(interval)+' seconds')
-	shutdown.startMonitoring()
+	shutdown.startProcess()
 
 	while True:
 		showPhoto(search_dir)

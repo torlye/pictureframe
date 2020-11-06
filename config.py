@@ -20,6 +20,7 @@ except FileNotFoundError:
 	config['photo'] = {}
 	config['photo']['interval'] = str(60*60)
 	config['shutdown'] = {}
+	config['shutdown']['enabled'] = str(True)
 	config['video'] = {}
 	config['weather'] = {}
 	config['weather']['interval'] = str(15*60)

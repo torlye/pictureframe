@@ -29,7 +29,7 @@ def playVideo(filepath):
 	return subprocess.call(omxparams)
 
 def start():
-	shutdown.startMonitoring()
+	shutdown.startProcess()
 	filelist=[]
 
 	for path, subdirs, files in os.walk(search_dir):

@@ -20,7 +20,7 @@ def showMeteogram():
 
 def start():
 	print('Showing meteogram for '+location+', refreshing every '+str(interval)+' seconds')
-	shutdown.startMonitoring()
+	shutdown.startProcess()
 
 	while True:
 		showMeteogram()
