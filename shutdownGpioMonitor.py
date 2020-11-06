@@ -34,3 +34,5 @@ def startMonitoring():
 
 if __name__ == '__main__':
 	startMonitoring()
+	while True:
+		time.sleep(100)
