@@ -16,21 +16,23 @@ def button_pressed(channel):
 		time1 = time.time()
 	else:
 		# Falling edge
-		time1 = sys.maxsize
+		if time.time() - time1 > 5:
+			# Button was held for 5s
+			GPIO.cleanup()
+			os.system("sudo shutdown -h now")
+			quit()
 
-def doShutdown():
-	GPIO.cleanup()
-	os.system("sudo shutdown -h now")
-	quit()
+isRunning = False
 
 def startMonitoring():
-	GPIO.setmode(GPIO.BOARD)
-	GPIO.setup(BUTTON_GPIO, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-	GPIO.add_event_detect(BUTTON_GPIO, GPIO.BOTH, callback=button_pressed, bouncetime=200)
+	global isRunning
+	if not isRunning:
+		isRunning = True
+		GPIO.setmode(GPIO.BOARD)
+		GPIO.setup(BUTTON_GPIO, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+		GPIO.add_event_detect(BUTTON_GPIO, GPIO.BOTH, callback=button_pressed, bouncetime=200)
 
 if __name__ == '__main__':
 	startMonitoring()
 	while True:
-		time.sleep(1)
-		if time.time() - time1 > 5:
-			doShutdown()
+		time.sleep(100)
