@@ -45,6 +45,8 @@ E.g. to start the menu on boot; add:
 pictureframe/menu.py
 ```
 
+If you want to start a specific function instead of showing the menu; simply specify another script; e.g. photo.py
+
 ## Minimize SD writes
 Minimizing writes may extend the life of the SD card.
 
@@ -59,4 +61,16 @@ tmpfs /tmp tmpfs defaults,size=10M 0 0
 sudo swapoff --all
 ```
 Add this to `/etc/rc.local`.
+
+
+## Screen brightness adjustment
+Brightness adjustment is specific to the model of LCD panel and controller board.
+
+If you have a script that sets brightness for your LCD panel; simply add a line in e.g. `~/.profile`
+to run it at login.
+
+E.g.
+```
+pictureframe/lcd-brightness-waveshare_7inch_c.sh 490
+```
 

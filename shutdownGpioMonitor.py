@@ -16,8 +16,8 @@ def button_pressed(channel):
 		time1 = time.time()
 	else:
 		# Falling edge
-		if time.time() - time1 > 5:
-			# Button was held for 5s
+		if time.time() - time1 > 3:
+			# Button was held for 3s
 			GPIO.cleanup()
 			os.system("sudo shutdown -h now")
 			quit()
