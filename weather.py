@@ -12,7 +12,7 @@ location = weatherConfig.get('location')
 def showMeteogram():
 	try:
 		wgetProc = subprocess.run(['wget', '-NqO', '-', 'https://www.yr.no/place/'+location+'/meteogram.png'], stdout=subprocess.PIPE)
-		p = subprocess.Popen(['fim', '-aqi', '--no-history'], stdin=subprocess.PIPE, stderr=subprocess.DEVNULL, stdout=subprocess.DEVNULL)
+		p = subprocess.Popen(['fim', '-c', "scale 1.6; pan 'left'", '-qi', '--no-history'], stdin=subprocess.PIPE, stderr=subprocess.DEVNULL, stdout=subprocess.DEVNULL)
 		p.communicate(wgetProc.stdout, timeout=interval)
 	except subprocess.TimeoutExpired:
 		p.send_signal(signal.SIGINT)
