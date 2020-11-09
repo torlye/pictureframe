@@ -19,3 +19,6 @@ provide suggestions for packages which add NTFS and exFAT support.
 Up to four removable media with one partition each (sda1 ... sdd1) are automatically mounted, all in read-only.
 
 They can be re-mounted as writable after login if needed.
+
+## Setup instructions
+[See SETUP.md](SETUP.md)
