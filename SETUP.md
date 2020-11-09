@@ -50,7 +50,7 @@ If you want to start a specific function instead of showing the menu; simply spe
 ## Minimize SD writes
 Minimizing writes may extend the life of the SD card.
 
-### Use tmpfs for 
+### Use tmpfs for /tmp
 Edit `/etc/fstab`. Insert the following line:
 ```
 tmpfs /tmp tmpfs defaults,size=10M 0 0
